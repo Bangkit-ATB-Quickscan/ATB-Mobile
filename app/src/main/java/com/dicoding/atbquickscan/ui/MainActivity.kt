@@ -1,4 +1,4 @@
-package com.dicoding.atbquickscan
+package com.dicoding.atbquickscan.ui
 
 import android.app.ProgressDialog
 import android.content.Intent
