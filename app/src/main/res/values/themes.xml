@@ -47,9 +47,92 @@
              (windowLightStatusBar = false). -->
         <item name="android:statusBarColor">@color/header_background</item>
         <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Gaya teks: semua peran tipografi Material 3 yang kita pakai
+             diarahkan ke versi yang memakai font Plus Jakarta Sans (lihat di bawah). -->
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.ATBQuickscan.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.ATBQuickscan.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.ATBQuickscan.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.ATBQuickscan.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.ATBQuickscan.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.ATBQuickscan.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.ATBQuickscan.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.ATBQuickscan.LabelLarge</item>
     </style>
 
     <style name="Theme.ATBQuickscan" parent="Base.Theme.ATBQuickscan" />
+
+    <!--
+        TEMA SPLASH SCREEN (LAYAR PEMBUKA)
+
+        Tema ini hanya dipakai sesaat ketika aplikasi baru dibuka.
+        - windowSplashScreenBackground   : warna latar layar pembuka
+        - windowSplashScreenAnimatedIcon : ikon di tengah layar (memakai gambar ikon launcher)
+        - postSplashScreenTheme          : tema yang dipakai SETELAH layar pembuka selesai
+
+        Supaya tema ini berfungsi, MainActivity wajib memanggil installSplashScreen()
+        dan AndroidManifest.xml memasang tema ini di MainActivity.
+    -->
+    <style name="Theme.ATBQuickscan.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/header_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.ATBQuickscan</item>
+    </style>
+
+    <!--
+        GAYA TEKS DENGAN FONT PLUS JAKARTA SANS
+
+        Setiap gaya di bawah "mewarisi" (parent) gaya teks bawaan Material 3,
+        jadi ukuran huruf & jarak barisnya tetap mengikuti standar Material 3.
+        Yang kita ganti hanya fontnya.
+
+        - android:fontFamily dan fontFamily ditulis dua-duanya supaya
+          font terpasang di semua jenis TextView (biasa maupun AppCompat).
+        - android:textFontWeight="500" = ketebalan medium, dipakai untuk judul kecil
+          dan teks tombol (sesuai aturan Material 3).
+    -->
+    <style name="TextAppearance.ATBQuickscan.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <style name="TextAppearance.ATBQuickscan.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
 
     <!--
         BENTUK SUDUT GAMBAR

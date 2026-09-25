@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    GAMBAR IKON LAUNCHER (lapisan depan)
+    Motif: paru-paru putih dengan garis "scan" berwarna cyan.
+
+    Aturan penting ikon adaptif: gambar utama harus berada di dalam
+    lingkaran berdiameter 66dp di tengah (area aman), karena bagian
+    pinggir bisa terpotong oleh bentuk ikon di HP tertentu.
+    Semua bentuk di bawah sudah berada di dalam area aman itu.
+
+    Gambar ini juga dipakai untuk splash screen (layar pembuka).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Paru-paru kiri -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M49,38 C42,38 34,49 32,62 C31,71 35,78 42,78 C47,78 51,74 51,67 L51,44 C51,40.5 50.5,38 49,38 Z" />
+
+    <!-- Paru-paru kanan -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,38 C66,38 74,49 76,62 C77,71 73,78 66,78 C61,78 57,74 57,67 L57,44 C57,40.5 57.5,38 59,38 Z" />
+
+    <!-- Batang tenggorokan (trakea) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,28 L56,28 L56,42 L52,42 Z" />
+
+    <!-- Cabang tenggorokan (bronkus) -->
+    <path
+        android:pathData="M54,41 L50,47 M54,41 L58,47"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+
+    <!-- Cahaya scan tipis di atas garis (transparan 35%) -->
+    <path
+        android:fillAlpha="0.35"
+        android:fillColor="#9DF0FA"
+        android:pathData="M28,49 L80,49 L80,57 L28,57 Z" />
+
+    <!-- Garis tepi teal di bawah garis scan, supaya garis tetap terlihat di atas paru-paru putih -->
+    <path
+        android:pathData="M28,57 L80,57"
+        android:strokeWidth="6"
+        android:strokeColor="#006972"
+        android:strokeLineCap="round" />
+
+    <!-- Garis scan -->
+    <path
+        android:pathData="M28,57 L80,57"
+        android:strokeWidth="2.5"
+        android:strokeColor="#9DF0FA"
+        android:strokeLineCap="round" />
+</vector>

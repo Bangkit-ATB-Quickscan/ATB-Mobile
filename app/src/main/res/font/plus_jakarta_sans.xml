@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    KELUARGA FONT "PLUS JAKARTA SANS"
+
+    Satu keluarga font = beberapa file font dengan ketebalan berbeda.
+    Dengan file ini, kita cukup menulis @font/plus_jakarta_sans di mana pun,
+    lalu Android otomatis memilih file yang cocok:
+    - teks biasa                        -> plus_jakarta_sans_regular (ketebalan 400)
+    - textFontWeight="500"              -> plus_jakarta_sans_medium  (ketebalan 500)
+    - textStyle="bold" / ketebalan 700  -> plus_jakarta_sans_bold    (ketebalan 700)
+
+    Font ini berlisensi SIL Open Font License 1.1 (lihat licenses/PlusJakartaSans-OFL.txt).
+-->
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <font
+        android:font="@font/plus_jakarta_sans_regular"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/plus_jakarta_sans_regular"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+
+    <font
+        android:font="@font/plus_jakarta_sans_medium"
+        android:fontStyle="normal"
+        android:fontWeight="500"
+        app:font="@font/plus_jakarta_sans_medium"
+        app:fontStyle="normal"
+        app:fontWeight="500" />
+
+    <font
+        android:font="@font/plus_jakarta_sans_bold"
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        app:font="@font/plus_jakarta_sans_bold"
+        app:fontStyle="normal"
+        app:fontWeight="700" />
+</font-family>

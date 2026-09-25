@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dicoding.atbquickscan.R
 import com.dicoding.atbquickscan.data.model.AtbResponse
 import com.dicoding.atbquickscan.data.network.ApiConfig
@@ -58,6 +59,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Pasang splash screen (layar pembuka). WAJIB dipanggil sebelum super.onCreate().
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

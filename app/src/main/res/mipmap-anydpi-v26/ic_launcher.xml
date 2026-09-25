@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    IKON ADAPTIF
+    background = lapisan belakang, foreground = gambar utama,
+    monochrome = versi satu warna untuk "ikon bertema" di Android 13+.
+    File .webp lama (ikon robot Android bawaan) sudah dihapus karena
+    minSdk aplikasi ini 30, sehingga semua HP memakai ikon adaptif ini.
+-->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@drawable/ic_launcher_background" />
     <foreground android:drawable="@drawable/ic_launcher_foreground" />
-    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_monochrome" />
 </adaptive-icon>
