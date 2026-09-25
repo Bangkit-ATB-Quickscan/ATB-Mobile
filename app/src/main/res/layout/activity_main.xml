@@ -4,7 +4,8 @@
 
     Susunan layar dari atas ke bawah:
     1. Header      : nama aplikasi + tagline, berwarna teal.
-    2. Isi         : kotak upload, tombol ganti gambar, kartu error, kartu tips.
+    2. Isi         : kotak upload, tombol ganti gambar, kartu error, kartu tips,
+                     dan bagian "Cara kerja".
                      Bagian ini dibungkus NestedScrollView supaya bisa di-scroll
                      di layar kecil atau saat HP diputar (landscape).
     3. Tombol utama: "Analisis Gambar", selalu menempel di bagian bawah layar.
@@ -137,6 +138,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/main_deskripsi_preview"
                     android:scaleType="centerCrop"
+                    android:transitionName="@string/transisi_gambar_rontgen"
                     android:visibility="gone"
                     app:shapeAppearanceOverlay="@style/ShapeAppearance.ATBQuickscan.SudutBulat" />
 
@@ -289,6 +291,161 @@
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <!--
+                BAGIAN "CARA KERJA"
+                3 langkah singkat untuk pengguna yang baru pertama kali memakai aplikasi.
+                Setiap langkah terdiri dari: lingkaran nomor + judul + penjelasan.
+            -->
+            <TextView
+                android:id="@+id/tvJudulCaraKerja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/cara_kerja_judul"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface" />
+
+            <!-- Langkah 1 -->
+            <LinearLayout
+                android:id="@+id/langkah1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNomorLangkah1"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/bg_nomor_langkah"
+                    android:gravity="center"
+                    android:text="@string/cara_kerja_nomor_1"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textColor="@color/md_on_primary_container"
+                    android:textFontWeight="700" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvJudulLangkah1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/cara_kerja_1_judul"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textFontWeight="700" />
+
+                    <TextView
+                        android:id="@+id/tvIsiLangkah1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/cara_kerja_1_isi"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Langkah 2 -->
+            <LinearLayout
+                android:id="@+id/langkah2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNomorLangkah2"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/bg_nomor_langkah"
+                    android:gravity="center"
+                    android:text="@string/cara_kerja_nomor_2"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textColor="@color/md_on_primary_container"
+                    android:textFontWeight="700" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvJudulLangkah2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/cara_kerja_2_judul"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textFontWeight="700" />
+
+                    <TextView
+                        android:id="@+id/tvIsiLangkah2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/cara_kerja_2_isi"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Langkah 3 -->
+            <LinearLayout
+                android:id="@+id/langkah3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNomorLangkah3"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/bg_nomor_langkah"
+                    android:gravity="center"
+                    android:text="@string/cara_kerja_nomor_3"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textColor="@color/md_on_primary_container"
+                    android:textFontWeight="700" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvJudulLangkah3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/cara_kerja_3_judul"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textFontWeight="700" />
+
+                    <TextView
+                        android:id="@+id/tvIsiLangkah3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/cara_kerja_3_isi"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

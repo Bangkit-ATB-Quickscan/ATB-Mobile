@@ -3,12 +3,20 @@ package com.dicoding.atbquickscan.ui
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.transition.Fade
+import android.transition.TransitionInflater
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.dicoding.atbquickscan.R
 import com.dicoding.atbquickscan.databinding.ActivityResultBinding
 import java.io.File
@@ -27,9 +35,19 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aktifkan fitur animasi perpindahan halaman. WAJIB sebelum super.onCreate().
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        aturAnimasiPerpindahan()
+
+        // Tunda animasi masuk sampai gambar selesai dimuat oleh Glide.
+        // Tanpa ini, yang "terbang" dari halaman utama adalah kotak kosong.
+        // Animasi dijalankan lagi di tampilkanGambar() lewat startPostponedEnterTransition().
+        postponeEnterTransition()
 
         // Ambil data yang dikirim dari MainActivity.
         val status = intent.getStringExtra(EXTRA_STATUS)
@@ -41,14 +59,37 @@ class ResultActivity : AppCompatActivity() {
         aturAksiTombol()
     }
 
+    /**
+     * Mengatur animasi halaman ini:
+     * - Fade (memudar) untuk isi halaman. Status bar & navigation bar dikecualikan
+     *   supaya warnanya tidak ikut berkedip.
+     * - "move" untuk gambar rontgen: animasi bawaan Android yang memindahkan
+     *   dan mengubah ukuran gambar dari posisi di halaman utama ke posisi di halaman ini.
+     */
+    private fun aturAnimasiPerpindahan() {
+        val animasiMemudar = Fade()
+        animasiMemudar.excludeTarget(android.R.id.statusBarBackground, true)
+        animasiMemudar.excludeTarget(android.R.id.navigationBarBackground, true)
+        window.enterTransition = animasiMemudar   // saat halaman ini dibuka
+        window.returnTransition = animasiMemudar  // saat halaman ini ditutup
+
+        val animasiGambar = TransitionInflater.from(this).inflateTransition(android.R.transition.move)
+        window.sharedElementEnterTransition = animasiGambar
+        window.sharedElementReturnTransition = animasiGambar
+    }
+
     // =====================================================================
     // BAGIAN 1: TOOLBAR DAN TOMBOL
     // =====================================================================
 
-    /** Tombol panah kembali di toolbar akan menutup halaman ini. */
+    /**
+     * Tombol panah kembali di toolbar akan menutup halaman ini.
+     * finishAfterTransition() = tutup halaman sambil menjalankan animasi balik,
+     * jadi gambar "terbang" kembali ke halaman utama (sama seperti tombol back HP).
+     */
     private fun aturToolbar() {
         binding.toolbar.setNavigationOnClickListener {
-            finish()
+            finishAfterTransition()
         }
     }
 
@@ -56,9 +97,13 @@ class ResultActivity : AppCompatActivity() {
         binding.tombolFaskes.setOnClickListener {
             bukaPetaFaskes()
         }
-        // "Scan Lagi" cukup menutup halaman ini. Halaman utama sudah dikosongkan
-        // dan siap dipakai untuk scan berikutnya.
         binding.tombolScanLagi.setOnClickListener {
+            // Beri tahu halaman utama bahwa pengguna ingin scan lagi,
+            // supaya halaman utama dikosongkan dan siap untuk gambar baru.
+            setResult(RESULT_OK)
+
+            // finish() biasa, tanpa animasi gambar kembali,
+            // karena gambar di halaman utama akan langsung dihapus.
             finish()
         }
     }
@@ -153,9 +198,14 @@ class ResultActivity : AppCompatActivity() {
      * placeholder = yang tampil selama gambar dimuat
      * error       = yang tampil jika gambar gagal dimuat
      * Keduanya kita isi dengan kotak berwarna polos (ColorDrawable).
+     *
+     * listener = "pendengar" yang diberi tahu Glide ketika gambar selesai dimuat
+     * (berhasil maupun gagal). Saat itulah animasi masuk yang tadi ditunda dijalankan.
      */
     private fun tampilkanGambar(pathGambar: String?) {
         if (pathGambar == null) {
+            // Tidak ada gambar: langsung jalankan animasi masuk supaya halaman tidak "macet".
+            startPostponedEnterTransition()
             return
         }
         val warnaKotakKosong = ContextCompat.getColor(this, R.color.md_surface_variant)
@@ -165,6 +215,32 @@ class ResultActivity : AppCompatActivity() {
             .load(File(pathGambar))
             .placeholder(kotakKosong)
             .error(kotakKosong)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    // Gambar gagal dimuat, tapi animasi tetap harus dijalankan.
+                    startPostponedEnterTransition()
+                    // false = biarkan Glide menampilkan gambar "error" seperti biasa.
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    // Gambar sudah siap, jalankan animasi masuk.
+                    startPostponedEnterTransition()
+                    // false = biarkan Glide memasang gambar ke ImageView seperti biasa.
+                    return false
+                }
+            })
             .into(binding.ivHasil)
     }
 

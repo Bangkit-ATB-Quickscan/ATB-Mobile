@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    LINGKARAN NOMOR LANGKAH
+    Dipakai di bagian "Cara kerja" sebagai latar angka 1, 2, 3.
+    shape="oval" + ukuran lebar = tinggi -> menjadi lingkaran.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/md_primary_container" />
+</shape>

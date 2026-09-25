@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    LAYOUT LEMBAR PILIHAN SUMBER GAMBAR (BOTTOM SHEET)
+
+    Lembar ini muncul dari bawah layar ketika pengguna mengetuk kotak upload
+    atau tombol "Ganti gambar". Isinya 2 pilihan: Galeri dan Kamera.
+    Setiap pilihan adalah LinearLayout yang bisa diketuk (clickable).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="24dp">
+
+    <!-- Garis pegangan kecil di bagian atas -->
+    <View
+        android:id="@+id/pegangan"
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_pegangan_sheet" />
+
+    <TextView
+        android:id="@+id/tvJudulSumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/sumber_judul"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textColor="?attr/colorOnSurface" />
+
+    <!-- ===================== PILIHAN 1: GALERI ===================== -->
+    <LinearLayout
+        android:id="@+id/pilihanGaleri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="72dp"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/ivIkonGaleri"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_galeri"
+            app:tint="?attr/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvJudulGaleri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sumber_galeri_judul"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurface" />
+
+            <TextView
+                android:id="@+id/tvIsiGaleri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sumber_galeri_isi"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ===================== PILIHAN 2: KAMERA ===================== -->
+    <LinearLayout
+        android:id="@+id/pilihanKamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="72dp"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/ivIkonKamera"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_kamera"
+            app:tint="?attr/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvJudulKamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sumber_kamera_judul"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurface" />
+
+            <TextView
+                android:id="@+id/tvIsiKamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sumber_kamera_isi"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

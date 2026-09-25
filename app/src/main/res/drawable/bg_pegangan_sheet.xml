@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    GARIS PEGANGAN DI ATAS BOTTOM SHEET
+    Garis kecil membulat yang memberi tanda bahwa lembar ini bisa diseret ke bawah.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/md_outline" />
+    <corners android:radius="2dp" />
+</shape>

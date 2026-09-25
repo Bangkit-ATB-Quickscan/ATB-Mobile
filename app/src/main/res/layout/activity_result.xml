@@ -116,6 +116,7 @@
                 android:background="?attr/colorSurfaceVariant"
                 android:contentDescription="@string/result_deskripsi_gambar"
                 android:scaleType="centerCrop"
+                android:transitionName="@string/transisi_gambar_rontgen"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.ATBQuickscan.SudutBulat" />
 
             <!-- LANGKAH SELANJUTNYA -->

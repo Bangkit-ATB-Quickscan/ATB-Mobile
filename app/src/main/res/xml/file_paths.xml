@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DAFTAR FOLDER YANG BOLEH DIBAGIKAN LEWAT FILEPROVIDER
+
+    Aplikasi kamera butuh izin untuk menyimpan foto ke folder milik aplikasi kita.
+    Di sini kita hanya membuka SATU folder: cache/foto_kamera/.
+    Folder lain tetap tertutup untuk aplikasi lain.
+-->
+<paths>
+    <cache-path
+        name="foto_kamera"
+        path="foto_kamera/" />
+</paths>

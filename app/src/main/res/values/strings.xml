@@ -14,7 +14,7 @@
     <string name="main_tagline">Skrining awal tuberkulosis dari foto rontgen dada</string>
 
     <string name="main_judul_unggah">Unggah foto rontgen dada</string>
-    <string name="main_petunjuk_ketuk">Ketuk untuk memilih gambar</string>
+    <string name="main_petunjuk_ketuk">Ketuk untuk memilih dari galeri atau kamera</string>
     <string name="main_petunjuk_format">Format JPG atau PNG</string>
     <string name="main_deskripsi_preview">Pratinjau foto rontgen yang dipilih</string>
     <string name="main_tombol_ganti">Ganti gambar</string>
@@ -23,6 +23,29 @@
 
     <string name="main_tips_judul">Tips agar hasil lebih baik</string>
     <string name="main_tips_isi">• Pastikan seluruh area dada terlihat, tidak terpotong.\n• Gunakan gambar yang jelas dan tidak buram.\n• Hindari pantulan cahaya jika memotret film rontgen.</string>
+
+    <!-- Bagian "Cara kerja" di halaman utama -->
+    <string name="cara_kerja_judul">Cara kerja</string>
+    <string name="cara_kerja_nomor_1" translatable="false">1</string>
+    <string name="cara_kerja_nomor_2" translatable="false">2</string>
+    <string name="cara_kerja_nomor_3" translatable="false">3</string>
+    <string name="cara_kerja_1_judul">Pilih foto rontgen</string>
+    <string name="cara_kerja_1_isi">Ambil dari galeri atau foto langsung film rontgen dengan kamera.</string>
+    <string name="cara_kerja_2_judul">Analisis gambar</string>
+    <string name="cara_kerja_2_isi">Ketuk tombol Analisis Gambar, lalu tunggu beberapa detik.</string>
+    <string name="cara_kerja_3_judul">Lihat hasilnya</string>
+    <string name="cara_kerja_3_isi">Baca status dan langkah selanjutnya, lalu cari faskes terdekat bila perlu.</string>
+
+    <!-- Lembar pilihan sumber gambar (bottom sheet) -->
+    <string name="sumber_judul">Pilih sumber gambar</string>
+    <string name="sumber_galeri_judul">Galeri</string>
+    <string name="sumber_galeri_isi">Pilih foto rontgen yang sudah tersimpan</string>
+    <string name="sumber_kamera_judul">Kamera</string>
+    <string name="sumber_kamera_isi">Foto langsung film rontgen dada</string>
+
+    <!-- Nama transisi gambar. Harus SAMA di activity_main.xml dan activity_result.xml
+         supaya Android tahu gambar mana yang "terbang" dari halaman utama ke halaman hasil. -->
+    <string name="transisi_gambar_rontgen" translatable="false">gambar_rontgen</string>
 
     <!-- ===================== PESAN ERROR ===================== -->
     <string name="error_server_belum_diatur_judul">Server analisis belum terhubung</string>
@@ -39,6 +62,9 @@
 
     <string name="error_gambar_judul">Gambar tidak bisa dibaca</string>
     <string name="error_gambar_pesan">Coba pilih gambar lain dengan format JPG atau PNG.</string>
+
+    <string name="error_kamera_judul">Kamera tidak tersedia</string>
+    <string name="error_kamera_pesan">Tidak ada aplikasi kamera yang bisa dipakai di perangkat ini. Silakan pilih gambar dari galeri.</string>
 
     <string name="error_umum_judul">Terjadi kesalahan</string>
     <string name="error_umum_pesan">Detail: %1$s</string>
