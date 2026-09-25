@@ -1,3 +1,71 @@
 <resources>
+    <!--
+        SEMUA TEKS YANG TAMPIL DI APLIKASI
+
+        Kenapa teks ditaruh di sini, bukan langsung di layout?
+        1. Mudah diubah: cukup ganti di satu tempat.
+        2. Mudah diterjemahkan ke bahasa lain nanti.
+        3. Android Studio tidak lagi memberi peringatan "Hardcoded text".
+    -->
     <string name="app_name">ATB Quickscan</string>
+
+    <!-- ===================== HALAMAN UTAMA ===================== -->
+    <string name="main_judul">ATB Quickscan</string>
+    <string name="main_tagline">Skrining awal tuberkulosis dari foto rontgen dada</string>
+
+    <string name="main_judul_unggah">Unggah foto rontgen dada</string>
+    <string name="main_petunjuk_ketuk">Ketuk untuk memilih gambar</string>
+    <string name="main_petunjuk_format">Format JPG atau PNG</string>
+    <string name="main_deskripsi_preview">Pratinjau foto rontgen yang dipilih</string>
+    <string name="main_tombol_ganti">Ganti gambar</string>
+    <string name="main_tombol_analisis">Analisis Gambar</string>
+    <string name="main_sedang_menganalisis">Menganalisis gambar…</string>
+
+    <string name="main_tips_judul">Tips agar hasil lebih baik</string>
+    <string name="main_tips_isi">• Pastikan seluruh area dada terlihat, tidak terpotong.\n• Gunakan gambar yang jelas dan tidak buram.\n• Hindari pantulan cahaya jika memotret film rontgen.</string>
+
+    <!-- ===================== PESAN ERROR ===================== -->
+    <string name="error_server_belum_diatur_judul">Server analisis belum terhubung</string>
+    <string name="error_server_belum_diatur_pesan">Aplikasi belum disambungkan ke server ML. Isi alamat server pada ML_API_URL di file ApiConfig.kt, lalu jalankan ulang aplikasi.</string>
+
+    <string name="error_koneksi_judul">Tidak dapat terhubung ke server</string>
+    <string name="error_koneksi_pesan">Periksa koneksi internet kamu, atau pastikan server ML sedang aktif dan alamatnya benar.</string>
+
+    <string name="error_server_judul">Server mengalami masalah</string>
+    <string name="error_server_pesan">Server membalas dengan kode error %1$d. Coba lagi beberapa saat lagi.</string>
+
+    <string name="error_jawaban_tidak_dikenal_judul">Jawaban server tidak dikenali</string>
+    <string name="error_jawaban_tidak_dikenal_pesan">Server mengirim hasil yang tidak dipahami aplikasi: \"%1$s\".</string>
+
+    <string name="error_gambar_judul">Gambar tidak bisa dibaca</string>
+    <string name="error_gambar_pesan">Coba pilih gambar lain dengan format JPG atau PNG.</string>
+
+    <string name="error_umum_judul">Terjadi kesalahan</string>
+    <string name="error_umum_pesan">Detail: %1$s</string>
+
+    <!-- ===================== HALAMAN HASIL ===================== -->
+    <string name="result_judul_toolbar">Hasil Analisis</string>
+    <string name="result_kembali">Kembali</string>
+    <string name="result_judul_gambar">Gambar yang dianalisis</string>
+    <string name="result_deskripsi_gambar">Foto rontgen dada yang dianalisis</string>
+    <string name="result_judul_langkah">Langkah selanjutnya</string>
+    <string name="result_disclaimer">Hasil ini dibuat oleh model AI dan hanya untuk skrining awal, bukan diagnosis. Diagnosis TB hanya bisa ditetapkan oleh tenaga kesehatan.</string>
+    <string name="result_tombol_faskes">Cari Faskes Terdekat</string>
+    <string name="result_tombol_scan_lagi">Scan Lagi</string>
+    <string name="result_maps_tidak_ada">Aplikasi peta tidak ditemukan di perangkat ini.</string>
+
+    <!-- Status 1: terindikasi TB -->
+    <string name="status_positif_judul">Terindikasi TB</string>
+    <string name="status_positif_deskripsi">Model menemukan pola pada gambar yang mengarah ke tuberkulosis.</string>
+    <string name="status_positif_langkah">Segera periksakan diri ke puskesmas atau dokter terdekat dan bawa hasil rontgen kamu. Pemeriksaan lanjutan diperlukan untuk memastikan hasil ini.</string>
+
+    <!-- Status 2: tidak terdeteksi tanda TB -->
+    <string name="status_negatif_judul">Tidak terdeteksi tanda TB</string>
+    <string name="status_negatif_deskripsi">Model tidak menemukan pola TB pada gambar ini.</string>
+    <string name="status_negatif_langkah">Jika kamu tetap mengalami gejala seperti batuk lebih dari 2 minggu, demam, atau berat badan turun, tetap periksakan diri ke tenaga kesehatan.</string>
+
+    <!-- Status 3: gambar tidak dapat dianalisis -->
+    <string name="status_tidak_valid_judul">Gambar tidak dapat dianalisis</string>
+    <string name="status_tidak_valid_deskripsi">Model tidak cukup yakin membaca gambar ini. Mungkin gambar bukan rontgen dada atau kualitasnya kurang jelas.</string>
+    <string name="status_tidak_valid_langkah">Coba scan lagi memakai foto rontgen dada yang lebih jelas dan tidak terpotong.</string>
 </resources>

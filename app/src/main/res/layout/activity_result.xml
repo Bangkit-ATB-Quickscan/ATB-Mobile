@@ -1,65 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    LAYOUT HALAMAN HASIL
+
+    Susunan layar dari atas ke bawah:
+    1. Toolbar     : judul "Hasil Analisis" + tombol kembali.
+    2. Isi         : kartu status, gambar, langkah selanjutnya, disclaimer.
+                     Dibungkus NestedScrollView supaya bisa di-scroll.
+    3. Tombol-tombol aksi di bagian bawah.
+
+    Warna & teks kartu status TIDAK ditulis di sini, karena berubah
+    sesuai hasil analisis. Semuanya diatur dari ResultActivity.kt.
+    Atribut "tools:" hanya untuk pratinjau di Android Studio, tidak ikut ke aplikasi.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical"
     tools:context=".ui.ResultActivity">
 
-    <LinearLayout
-        android:id="@+id/borderImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/rounded_corner_background_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/borderText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+    <!-- ===================== 1. TOOLBAR ===================== -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/header_background"
+        app:navigationContentDescription="@string/result_kembali"
+        app:navigationIcon="@drawable/ic_kembali"
+        app:navigationIconTint="@color/header_text"
+        app:title="@string/result_judul_toolbar"
+        app:titleTextColor="@color/header_text" />
 
-        <ImageView
-            android:id="@+id/iv_result"
-            android:layout_width="279dp"
-            android:layout_height="323dp"
-            android:clipToOutline="true"
-            android:outlineProvider="background"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/myTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_landscape_24" />
-    </LinearLayout>
+    <!-- ===================== 2. ISI (BISA DI-SCROLL) ===================== -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollIsi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <LinearLayout
-        android:id="@+id/borderText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="250dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/rounded_corner_background_with_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/borderImage"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/tv_result"
-            android:layout_width="279dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:lineHeight="20dp"
-            android:text="X-ray results indicate infected lungs with TB (Tuberculosis)"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.484"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.837" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <!-- KARTU STATUS: bagian paling penting, jadi diletakkan paling atas -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/kartuStatus"
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/status_positif_container"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/ivIkonStatus"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:importantForAccessibility="no"
+                        tools:src="@drawable/ic_peringatan"
+                        tools:tint="@color/status_positif_icon" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvJudulStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceTitleLarge"
+                            android:textStyle="bold"
+                            tools:text="@string/status_positif_judul"
+                            tools:textColor="@color/status_positif_text" />
+
+                        <TextView
+                            android:id="@+id/tvDeskripsiStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            tools:text="@string/status_positif_deskripsi"
+                            tools:textColor="@color/status_positif_text" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- GAMBAR YANG DIANALISIS -->
+            <TextView
+                android:id="@+id/tvJudulGambar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/result_judul_gambar"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivHasil"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginTop="12dp"
+                android:background="?attr/colorSurfaceVariant"
+                android:contentDescription="@string/result_deskripsi_gambar"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.ATBQuickscan.SudutBulat" />
+
+            <!-- LANGKAH SELANJUTNYA -->
+            <TextView
+                android:id="@+id/tvJudulLangkah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/result_judul_langkah"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface" />
+
+            <TextView
+                android:id="@+id/tvLangkah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="4dp"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                tools:text="@string/status_positif_langkah" />
+
+            <!-- DISCLAIMER: selalu tampil, apa pun hasilnya -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/kartuDisclaimer"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivIkonDisclaimer"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_info"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tvDisclaimer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="@string/result_disclaimer"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ===================== 3. TOMBOL AKSI ===================== -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tombolFaskes"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/result_tombol_faskes"
+            app:icon="@drawable/ic_lokasi"
+            app:iconGravity="textStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tombolScanLagi"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/result_tombol_scan_lagi"
+            app:icon="@drawable/ic_ulang"
+            app:iconGravity="textStart" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

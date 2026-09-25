@@ -1,5 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    DAFTAR WARNA APLIKASI (MODE TERANG / LIGHT MODE)
+
+    File ini punya "kembaran" di folder values-night/colors.xml.
+    Nama warnanya SAMA, tapi nilainya berbeda. Android akan otomatis memilih:
+    - values/colors.xml        -> saat HP memakai mode terang
+    - values-night/colors.xml  -> saat HP memakai mode gelap (dark mode)
+
+    Jadi di layout kita cukup menulis @color/nama_warna, tidak perlu
+    memikirkan mode terang atau gelap lagi.
+
+    Palet ini dibuat dari satu warna dasar (seed) teal #0E7C86 memakai
+    aturan warna Material 3. Semua pasangan teks & latar sudah dicek
+    kontrasnya (lolos standar WCAG AA).
+-->
 <resources>
+
+    <!-- ===================== WARNA DASAR ===================== -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ============ WARNA BRAND (dipakai oleh tema) ============ -->
+    <!-- "primary" = warna utama aplikasi, misalnya warna tombol utama. -->
+    <color name="md_primary">#006972</color>
+    <!-- "onPrimary" = warna teks/ikon yang diletakkan DI ATAS warna primary. -->
+    <color name="md_on_primary">#FFFFFF</color>
+    <color name="md_primary_container">#9DF0FA</color>
+    <color name="md_on_primary_container">#004F56</color>
+
+    <color name="md_secondary">#4A6366</color>
+    <color name="md_on_secondary">#FFFFFF</color>
+    <color name="md_secondary_container">#CDE7EB</color>
+    <color name="md_on_secondary_container">#324B4E</color>
+
+    <color name="md_tertiary">#515E7D</color>
+    <color name="md_on_tertiary">#FFFFFF</color>
+    <color name="md_tertiary_container">#D8E2FF</color>
+    <color name="md_on_tertiary_container">#394764</color>
+
+    <!-- "error" dipakai HANYA untuk error sistem (misal: server tidak bisa dihubungi),
+         BUKAN untuk hasil medis. -->
+    <color name="md_error">#BA1A1A</color>
+    <color name="md_on_error">#FFFFFF</color>
+    <color name="md_error_container">#FFDAD6</color>
+    <color name="md_on_error_container">#93000A</color>
+
+    <!-- "surface" = warna latar belakang halaman dan kartu. -->
+    <color name="md_background">#F5FAFB</color>
+    <color name="md_on_background">#171D1D</color>
+    <color name="md_surface">#F5FAFB</color>
+    <color name="md_on_surface">#171D1D</color>
+    <color name="md_surface_variant">#DAE4E5</color>
+    <color name="md_on_surface_variant">#3F484A</color>
+    <!-- "outline" = warna garis tepi (border). -->
+    <color name="md_outline">#6F797A</color>
+
+    <!-- ============ WARNA HEADER (bagian atas layar) ============ -->
+    <color name="header_background">#006972</color>
+    <color name="header_text">#FFFFFF</color>
+
+    <!-- ============ WARNA STATUS HASIL ANALISIS ============
+         Setiap status punya 3 warna:
+         - _icon      : warna ikon
+         - _container : warna latar kartu status
+         - _text      : warna teks di atas kartu status
+    -->
+
+    <!-- Status 1: Terindikasi TB (turunan dari oranye lama #FD5A33) -->
+    <color name="status_positif_icon">#B52700</color>
+    <color name="status_positif_container">#FFDAD2</color>
+    <color name="status_positif_text">#3D0700</color>
+
+    <!-- Status 2: Tidak terdeteksi tanda TB (hijau) -->
+    <color name="status_negatif_icon">#006D43</color>
+    <color name="status_negatif_container">#92F7BC</color>
+    <color name="status_negatif_text">#002111</color>
+
+    <!-- Status 3: Gambar tidak dapat dianalisis (kuning) -->
+    <color name="status_tidak_valid_icon">#775A00</color>
+    <color name="status_tidak_valid_container">#FFDF99</color>
+    <color name="status_tidak_valid_text">#251A00</color>
+
 </resources>

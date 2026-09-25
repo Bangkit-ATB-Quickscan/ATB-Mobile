@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    LAPISAN SEMI-TRANSPARAN SAAT LOADING
+    Ditaruh di atas gambar ketika aplikasi sedang menganalisis,
+    supaya tulisan "Menganalisis gambar…" tetap mudah dibaca.
+    Warna #CC di depan = tingkat transparansi (sekitar 80%).
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#CC000000" />
+    <corners android:radius="16dp" />
+</shape>

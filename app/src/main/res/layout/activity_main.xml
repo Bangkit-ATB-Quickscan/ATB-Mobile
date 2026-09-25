@@ -1,55 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    LAYOUT HALAMAN UTAMA
+
+    Susunan layar dari atas ke bawah:
+    1. Header      : nama aplikasi + tagline, berwarna teal.
+    2. Isi         : kotak upload, tombol ganti gambar, kartu error, kartu tips.
+                     Bagian ini dibungkus NestedScrollView supaya bisa di-scroll
+                     di layar kecil atau saat HP diputar (landscape).
+    3. Tombol utama: "Analisis Gambar", selalu menempel di bagian bawah layar.
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <!-- ===================== 1. HEADER ===================== -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/black"
-        android:textSize="26dp"
-        android:textStyle="bold"
+        android:background="@drawable/bg_header"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/firebaseimage"
+        <TextView
+            android:id="@+id/tvJudulAplikasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_judul"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="@color/header_text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/main_tagline"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/header_text" />
+    </LinearLayout>
+
+    <!-- ===================== 2. ISI (BISA DI-SCROLL) ===================== -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollIsi"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/selectImagebtn"
+        app:layout_constraintBottom_toTopOf="@+id/tombolAnalisis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="30dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/header">
 
-    <Button
-        android:id="@+id/selectImagebtn"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="Select Image"
-        app:layout_constraintBottom_toTopOf="@+id/uploadimagebtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <Button
-        android:id="@+id/uploadimagebtn"
+            <TextView
+                android:id="@+id/tvJudulUnggah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/main_judul_unggah"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface" />
+
+            <!--
+                KOTAK UPLOAD
+                FrameLayout = wadah yang menumpuk isinya di atas satu sama lain.
+                Di dalamnya ada 3 lapisan, dan hanya yang dibutuhkan yang ditampilkan:
+                a. placeholderUpload : ikon + petunjuk (saat belum ada gambar)
+                b. ivPreview         : pratinjau gambar (setelah gambar dipilih)
+                c. lapisanLoading    : animasi loading (saat sedang menganalisis)
+            -->
+            <FrameLayout
+                android:id="@+id/kotakUpload"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_kotak_upload"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <!-- a. Petunjuk saat belum ada gambar -->
+                <LinearLayout
+                    android:id="@+id/placeholderUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivIkonUpload"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_gambar"
+                        app:tint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/tvPetunjukKetuk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/main_petunjuk_ketuk"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:id="@+id/tvPetunjukFormat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/main_petunjuk_format"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <!-- b. Pratinjau gambar. ShapeableImageView bisa membuat sudut gambar membulat. -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/main_deskripsi_preview"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.ATBQuickscan.SudutBulat" />
+
+                <!-- c. Lapisan loading saat gambar sedang dianalisis -->
+                <LinearLayout
+                    android:id="@+id/lapisanLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_overlay_loading"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progressAnalisis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        app:indicatorColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvSedangMenganalisis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/main_sedang_menganalisis"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Tombol kecil untuk mengganti gambar. Hanya tampil setelah gambar dipilih. -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tombolGantiGambar"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="4dp"
+                android:text="@string/main_tombol_ganti"
+                android:visibility="gone"
+                app:icon="@drawable/ic_ulang" />
+
+            <!--
+                KARTU ERROR
+                Tersembunyi (gone) secara default. Muncul jika analisis gagal,
+                misalnya karena server ML belum tersambung.
+            -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/kartuError"
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="?attr/colorErrorContainer"
+                app:cardCornerRadius="16dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivIkonError"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_error"
+                        app:tint="?attr/colorOnErrorContainer" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvJudulError"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceTitleSmall"
+                            android:textColor="?attr/colorOnErrorContainer"
+                            android:textStyle="bold"
+                            tools:text="@string/error_server_belum_diatur_judul" />
+
+                        <TextView
+                            android:id="@+id/tvPesanError"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnErrorContainer"
+                            tools:text="@string/error_server_belum_diatur_pesan" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- KARTU TIPS: panduan singkat supaya gambar yang dipilih berkualitas baik -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/kartuTips"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivIkonTips"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_info"
+                        app:tint="?attr/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvJudulTips"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_tips_judul"
+                            android:textAppearance="?attr/textAppearanceTitleSmall"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvIsiTips"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:lineSpacingExtra="4dp"
+                            android:text="@string/main_tips_isi"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!--
+        ===================== 3. TOMBOL UTAMA =====================
+        android:enabled="false" -> tombol tidak bisa ditekan sampai gambar dipilih.
+        Ini mencegah aplikasi crash karena mencoba menganalisis gambar yang belum ada.
+    -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tombolAnalisis"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="168dp"
-        android:layout_marginHorizontal="16dp"
-        android:text="Upload Image"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:enabled="false"
+        android:text="@string/main_tombol_analisis"
+        app:icon="@drawable/ic_analisis"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
